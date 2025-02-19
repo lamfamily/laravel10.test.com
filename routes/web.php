@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MasterCardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,5 @@ Route::get('/', function () {
     // return view('welcome');
     return "hello laravel 10";
 });
+
+Route::get('/mastercard/test1', [MasterCardController::class, 'test1']);
