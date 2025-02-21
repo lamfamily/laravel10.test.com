@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MasterCardController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 });
 
 Route::get('/mastercard/test1', [MasterCardController::class, 'test1']);
+
+Route::get('/payment/return/{check_code}', [PaymentController::class, 'return']);
+Route::get('/payment/cancel/{check_code}', [PaymentController::class, 'cancel']);

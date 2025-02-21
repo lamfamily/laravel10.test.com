@@ -9,6 +9,10 @@ class MasterCardController extends Controller
 {
     public function test1(Request $request)
     {
+        // 这个必须是唯一的,临时的,不能重复
+        $check_code = '1111aaaaaa333333334444bbbbb';
+
+        $order_id =
         $init_checkout_data = [
             'apiOperation' => 'INITIATE_CHECKOUT',
             'interaction' => [
@@ -20,6 +24,10 @@ class MasterCardController extends Controller
                     'customerEmail' => 'HIDE',
                 ],
                 'operation' => 'AUTHORIZE',
+                'returnUrl' => 'http://laravel10.test.com/payment/return/' . $check_code,
+                'cancelUrl' => 'http://laravel10.test.com/payment/cancel/' . $check_code,
+                'timeoutUrl' => 'http://laravel10.test.com/payment/cancel/' . $check_code,
+                'timeout' => 1790,
                 'merchant' => [
                     'name' => 'Test Merchant',
                 ],
