@@ -74,3 +74,20 @@ Artisan::command('find_loreal_incorrect_amount_order', function () {
         $page++;
     } while ($order_list->count() > 0);
 });
+
+
+Artisan::command('test-color', function () {
+    $this->line('this is a line');
+    $this->warn('this is a warning');
+    $this->comment('this is a comment');
+    $this->error('this is an error');
+    $this->question('this is a question');
+    $this->info('this is an info');
+    $this->line('<bg=black> My awesome message </>');
+    $this->line('<fg=green> My awesome message </>');
+    $this->line('<bg=red;fg=yellow> My awesome message </>');
+    $this->line('<bg=red;fg=yellow> My awesome message </>');
+    $this->line("<options=bold;fg=red> MY AWESOME MESSAGE </>");
+    $this->line("<options=bold;fg=red> MY AWESOME MESSAGE </>");
+    $this->line("<options=underscore;bg=cyan;fg=blue> MY MESSAGE </>");
+});
