@@ -39,4 +39,9 @@ class TestController extends Controller
     {
         return response(app(TestServiceInterface::class)->doSomething());
     }
+
+    public function testApplyPay()
+    {
+        return view('test.applypay');
+    }
 }
