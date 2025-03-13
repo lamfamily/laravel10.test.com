@@ -3,6 +3,7 @@
 use App\Models\TmpModels\KieOrder;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,4 +91,73 @@ Artisan::command('test-color', function () {
     $this->line("<options=bold;fg=red> MY AWESOME MESSAGE </>");
     $this->line("<options=bold;fg=red> MY AWESOME MESSAGE </>");
     $this->line("<options=underscore;bg=cyan;fg=blue> MY MESSAGE </>");
+});
+
+
+Artisan::command('test-ecpay', function () {
+    $url = 'https://ecpg-stage.ecpay.com.tw/Merchant/GetTokenbyUser';
+
+    $merchant_id = '3002607';
+    $current_timestamp = time();
+
+    // AES 加密用的 KEY 和 IV
+    $hask_key = 'pwFHCqoQZGmho4w6';
+    $hash_iv = 'EkRm7iFT261dpevs';
+
+    $tmp_data = [
+        'MerchantID' => $merchant_id,
+        'ConsumerInfo' => [
+            'MerchantMemberID' => 'test123456',
+            'Email' => 'customer@email.com',
+            'Phone' => '0912345678',
+            'Name' => 'Test',
+            'CountryCode' => '158'
+        ]
+    ];
+
+    // 先 urlencode,在进行AES加密，128bit,cipermode = CBC, padding_mode = PKCS7
+    $data = urlencode(json_encode($tmp_data));
+    $data = openssl_encrypt($data, 'AES-128-CBC', $hask_key, OPENSSL_RAW_DATA, $hash_iv);
+    $data = base64_encode($data);
+
+    $data = [
+        'MerchantID' => $merchant_id,
+        'RqHeader' => [
+            'Timestamp' => $current_timestamp,
+        ],
+        'Data' => $data,
+    ];
+
+    $res = Http::post($url, $data);
+
+    $res_data = $res->json();
+
+    $status_code = $res->status();
+
+    if ($status_code == 200) {
+
+        $trans_code = $res_data['TransCode'] ?? '';
+        if (!$trans_code) {
+            $this->info('request api error!');
+            return;
+        }
+
+        if ($trans_code != 1) {
+            $this->info('request api error:' . $res_data['TransMsg'] ?? '');
+            return;
+        }
+
+        // AES decrpt
+        $return_data = openssl_decrypt(base64_decode($res_data['Data']), 'AES-128-CBC', $hask_key, OPENSSL_RAW_DATA, $hash_iv);
+
+        $return_data = json_decode(urldecode($return_data), true);
+
+        echo "<pre>";
+        var_dump($return_data);
+        echo "</pre>";
+        exit();
+    } else {
+        $this->info('request api error!');
+    }
+
 });

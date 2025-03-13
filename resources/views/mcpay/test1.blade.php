@@ -50,7 +50,7 @@
     $(function() {
         var Environment = 'STAGE'; //請設定要連線的環境: 測試 STAGE ,正式PROD
         var envi = GetEnvi(Environment);
-        var _token = '9cbf8fac271b475bae42cbe6aea8a9cc'; //請設定你取到的廠商驗證碼
+        var _token = '12da001d58ac4ad1888b18782f806552'; //請設定你取到的廠商驗證碼
 
         //初始化SDK畫面
         ECPay.initialize(envi, 1, function(errMsg) {
