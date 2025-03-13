@@ -23,6 +23,7 @@
     </style>
 </head>
 <body>
+    <h1>test Apple Pay</h1>
     <div>
         <button type="button" id="applePay"></button>
         <p style="display:none" id="got_notactive">ApplePay is possible on this browser, but not currently activated.</p>
@@ -42,6 +43,8 @@
             } else {
                 document.getElementById("got_notactive").style.display = "block";
             }
+        }).catch(function(error) {
+            alert(error)
         });
     } else {
         document.getElementById("notgot").style.display = "block";
@@ -57,7 +60,7 @@
             product: 'iPad',
             currency: 'hkd',
             country: 'hk',
-            amount: 0.10,
+            amount: 0.01,
             domain: 'lan-dev-eshop.fusiongogo.com'
         }).then(function(result) {
             document.getElementById('result').textContent = JSON.stringify(result)
