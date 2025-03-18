@@ -16,15 +16,7 @@
 
 <body>
     <div class="order-info">
-        <div class="oi-lan-box">
-            <div class="oi-lan" style="text-align: right;">
-                <select id="Language">
-                    <option value="zh-TW">繁體中文</option>
-                    <option value="en-US">English</option>
-                </select>
-            </div>
-        </div>
-        <div id="ECPayPayment"></div><br />
+        <div id="ECPayPayment">result:</div><br />
 
         <form action="" id="PayProcess" method="post">
             <div style="text-align: center;">
@@ -44,95 +36,58 @@
 <!-- 綠界科技 ECPay SDK 需引用JS 區塊 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
-<script src="https://ecpg.ecpay.com.tw/Scripts/sdk-1.0.0.js?t=20210121100116"></script>
+<script src="https://ecpg-stage.ecpay.com.tw/Scripts/sdk-1.0.0.js?t=20210121100116"></script>
 
 <script type="text/javascript">
     $(function() {
-        var Environment = 'STAGE'; //請設定要連線的環境: 測試 STAGE ,正式PROD
-        var envi = GetEnvi(Environment);
-        var _token = '12da001d58ac4ad1888b18782f806552'; //請設定你取到的廠商驗證碼
+        var env = "{{$env}}";
+        var token = "{{$token}}"; //請設定你取到的廠商驗證碼
+        var is_show_loading = 1;
+        var lang = ECPay.Language.zhTW;
 
         //初始化SDK畫面
-        ECPay.initialize(envi, 1, function(errMsg) {
-
-            if (_token === '') {
-                _token = prompt('請填入Token: ');
-            }
-
+        ECPay.initialize(env, is_show_loading, function(errMsg) {
             try {
-                ECPay.createPayment(_token, ECPay.Language.zhTW, function(errMsg) {
-                    //console.log('Callback Message: ' + errMsg);
-                    if (errMsg != null)
+                ECPay.createPayment(token, lang, function(errMsg) {
+                    if (errMsg != null) {
                         ErrHandle(errMsg);
+                    }
                 }, 'V2');
-                $('#Language').val(ECPay.Language.zhTW);
+                $('#Language').val(lang);
             } catch (err) {
                 ErrHandle(err);
             }
         });
 
-        //切換SDK語系
-        $('#Language').on('change', function() {
-            try {
-                ECPay.createPayment(_token, $('#Language').val(), function(errMsg) {
-                    //console.log('Callback Message: ' + errMsg);
-                    if (errMsg != null)
-                        ErrHandle(errMsg);
-                }, 'V2');
-
-            } catch (err) {
-                ErrHandle(null);
-            }
-        });
-
-        //消費者選擇完成付款方式,取得PayToken
-
+        // 消費者選擇完成付款方式,取得PayToken
         $('#btnPay').click(function() {
 
             try {
                 ECPay.getPayToken(function(paymentInfo, errMsg) {
-                    //console.log("response => getPayToken(paymentInfo, errMsg):", paymentInfo, errMsg);
                     if (errMsg != null) {
                         ErrHandle(errMsg);
                         return;
                     };
                     $("#PayToken").val(paymentInfo.PayToken);
 
-                    //$("#PayProcess").submit();
                     return true;
                 });
             } catch (err) {
-                // ErrHandle(err);
+                console.log(111)
+                ErrHandle(err);
             }
 
             return false;
         });
     });
 
-    function GetEnvi(env) {
-        var result = 'STAGE';
-        switch (env) {
-
-            case 'STAGE':
-                result = 'Stage';
-                break;
-            case 'PROD':
-                result = 'Prod';
-                break;
-        }
-        return result;
-    }
-
-    function ErrHandle(strErr) {
-
-        if (strErr != null) {
-            $('#ECPayPayment').append('<div style="text-align: center;"><label style="color: red;">' + strErr + '</label></div>');
-            console.log(strErr);
+    function ErrHandle(err) {
+        if (err != null) {
+            $('#ECPayPayment').append('<div style="text-align: center;"><label style="color: red;">' + err + '</label></div>');
+            console.log(err);
         } else {
             $('#ECPayPayment').append('<div style="text-align: center;"><label style="color: red;">Token取得失敗</label></div>');
             console.log('Wrong');
         }
-
-        //$('#btnPay').hide();
     }
 </script>

@@ -1,9 +1,10 @@
 <?php
 
+use App\Services\MCPayService;
 use App\Models\TmpModels\KieOrder;
 use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,5 +160,18 @@ Artisan::command('test-ecpay-get-token', function () {
     } else {
         $this->info('request api error!');
     }
+});
 
+Artisan::command('test-ecpay-service', function () {
+    $ecpay_service = new MCPayService();
+
+    $post_data = [
+        'MerchantMemberID' => 'test123456',
+        'Email' => 'customer@email.com',
+        'Phone' => '0912345678',
+        'Name' => 'Test',
+        'CountryCode' => '158'
+    ];
+
+    $this->info($ecpay_service->getToken($post_data));
 });
