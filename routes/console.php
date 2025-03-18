@@ -94,7 +94,7 @@ Artisan::command('test-color', function () {
 });
 
 
-Artisan::command('test-ecpay', function () {
+Artisan::command('test-ecpay-get-token', function () {
     $url = 'https://ecpg-stage.ecpay.com.tw/Merchant/GetTokenbyUser';
 
     $merchant_id = '3002607';
