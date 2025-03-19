@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\MasterCardController;
+use App\Livewire\Counter;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\MCPayController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\TestController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MasterCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,6 @@ Route::prefix('/test')->group(function() {
     Route::get('/test3', [TestController::class, 'test3']);
     Route::get('/test-applypay', [TestController::class, 'testApplypay']);
 });
+
+// for livewire
+Route::get('/livewire-counter', Counter::class);
