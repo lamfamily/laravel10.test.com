@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\MCPayService;
+use App\Services\ECPayService;
 use App\Models\TmpModels\KieOrder;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Http;
@@ -163,7 +163,7 @@ Artisan::command('test-ecpay-get-token', function () {
 });
 
 Artisan::command('test-ecpay-service', function () {
-    $ecpay_service = new MCPayService();
+    $ecpay_service = new ECPayService();
 
     $post_data = [
         'MerchantMemberID' => 'test123456',

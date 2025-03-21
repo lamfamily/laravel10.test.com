@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\MCPayService;
+use App\Services\ECPayService;
 
-class MCPayController extends Controller
+class ECPayController extends Controller
 {
     public function test1(Request $request)
     {
@@ -18,7 +18,7 @@ class MCPayController extends Controller
                 'CountryCode' => '158'
             ];
 
-            $ecpay_service = new MCPayService();
+            $ecpay_service = new ECPayService();
 
             $post_data = [
                 'MerchantMemberID' => 'test123456',
@@ -30,7 +30,7 @@ class MCPayController extends Controller
 
             $token = $ecpay_service->getToken($post_data);
 
-            return view('mcpay.test1', [
+            return view('ecpay.test1', [
                 'token' => $token,
                 'env' => $ecpay_service->env,
             ]);

@@ -132,9 +132,9 @@ return [
             'path' => storage_path('logs/mastercard.log'),
         ],
 
-        'mcpay' => [
+        'ecpay' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/mcpay.log'),
+            'path' => storage_path('logs/ecpay.log'),
             'level' => env('LOG_LEVEL', 'debug'), // 日志级别
             'days' => 365,
         ],

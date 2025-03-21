@@ -3,7 +3,7 @@
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\MCPayController;
+use App\Http\Controllers\ECPayController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MasterCardController;
 
@@ -28,7 +28,7 @@ Route::get('/mastercard/test1', [MasterCardController::class, 'test1']);
 Route::get('/payment/return/{check_code}', [PaymentController::class, 'return']);
 Route::get('/payment/cancel/{check_code}', [PaymentController::class, 'cancel']);
 
-Route::get('/mcpay/test1', [MCPayController::class, 'test1']);
+Route::get('/ecpay/test1', [ECPayController::class, 'test1']);
 
 Route::prefix('/test')->group(function() {
     Route::get('/test1', [TestController::class, 'test1']);

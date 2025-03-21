@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Contracts\TestServiceInterface;
-use App\Services\MCPayService;
+use App\Services\ECPayService;
 use App\Services\Test1Service;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(TestServiceInterface::class, Test1Service::class);
 
-        $this->app->singleton(MCPayService::class, function () {
-            return new MCPayService();
+        $this->app->singleton(ECPayService::class, function () {
+            return new ECPayService();
         });
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
-class MCPayService
+class ECPayService
 {
     const RETURN_SUCCESSS_CODE = 1;
 
@@ -74,7 +74,7 @@ class MCPayService
 
         $res = Http::post($req_url, $req_data);
 
-        Log::channel('mcpay')->info('request log: ' . $req_id, [$req_url, $req_data, $res->json()]);
+        Log::channel('ecpay')->info('request log: ' . $req_id, [$req_url, $req_data, $res->json()]);
 
         $res_data = $res->json();
 
@@ -95,7 +95,7 @@ class MCPayService
 
             $return_data = json_decode(urldecode($return_data), true);
 
-            Log::channel('mcpay')->info('response log: ' . $req_id, $return_data);
+            Log::channel('ecpay')->info('response log: ' . $req_id, $return_data);
 
             if ($return_data['RtnCode'] == self::RETURN_SUCCESSS_CODE) {
                 return $return_data['Token'];
