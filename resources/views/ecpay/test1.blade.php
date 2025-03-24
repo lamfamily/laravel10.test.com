@@ -16,7 +16,7 @@
 
 <body>
     <div class="order-info">
-        <div id="ECPayPayment">result:</div><br />
+        <div id="ECPayPayment"></div><br />
 
         <form action="" id="PayProcess" method="post">
             <div style="text-align: center;">
@@ -25,9 +25,15 @@
                 <input id="btnPay" type="button" class="btn single btn-gray-dark" value="確認付款" />
             </div>
             <br />
-            <div style="text-align: center;">
+            <!-- <div style="text-align: center;">
                 消費者選擇付款方式取得的PayToken : <input id="PayToken" name="PayToken" type="Text" size="50" value="" />
-            </div>
+            </div> -->
+        </form>
+
+        <form action="/ecpay/test2" method="post" id="form2">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="order_no" value="{{ $order_no }}">
+            <input type="hidden" name="PayToken" id="PayToken" value="">
         </form>
     </div>
 </body>
@@ -69,6 +75,8 @@
                         return;
                     };
                     $("#PayToken").val(paymentInfo.PayToken);
+
+                    $('#form2').submit();
 
                     return true;
                 });

@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'ecpay/3d_order_result_call', // 添加回调地址
     ];
 }
