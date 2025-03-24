@@ -77,17 +77,17 @@ class ECPayController extends Controller
 
         $ecpay_service = new ECPayService();
 
-        
+        $ecpay_service->handleReturnCall($post_data);
 
     }
 
     public function periodReturnCall(Request $request)
     {
         $post_data = $request->all();
-        echo "<pre>";
-        var_dump('period return call', $post_data);
-        echo "</pre>";
-        exit();
+
+        $ecpay_service = new ECPayService();
+
+        $ecpay_service->handlePeriodReturnCall($post_data);
     }
 
     public function threeDOrderResultCall(Request $request)
@@ -113,9 +113,9 @@ class ECPayController extends Controller
     public function unionOrderResultCall(Request $request)
     {
         $post_data = $request->all();
-        echo "<pre>";
-        var_dump('union order result call', $post_data);
-        echo "</pre>";
-        exit();
+
+        $ecpay_service = new ECPayService();
+
+        $ecpay_service->handleUnionOrderResultCall($post_data);
     }
 }
