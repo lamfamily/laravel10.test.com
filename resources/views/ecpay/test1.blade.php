@@ -38,8 +38,6 @@
     </div>
 </body>
 
-</html>
-<!-- 綠界科技 ECPay SDK 需引用JS 區塊 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
 <script src="https://ecpg-stage.ecpay.com.tw/Scripts/sdk-1.0.0.js?t=20210121100116"></script>
@@ -98,3 +96,5 @@
         }
     }
 </script>
+</html>
+<!-- 綠界科技 ECPay SDK 需引用JS 區塊 -->

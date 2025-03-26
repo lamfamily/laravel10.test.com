@@ -10,14 +10,6 @@ class ECPayController extends Controller
     public function test1(Request $request)
     {
         try {
-            $post_data = [
-                'MerchantMemberID' => 'test123456',
-                'Email' => 'customer@email.com',
-                'Phone' => '0912345678',
-                'Name' => 'Test',
-                'CountryCode' => '158'
-            ];
-
             $ecpay_service = new ECPayService();
 
             $order_no = 'O' . time() . random_int(1000, 9999);
