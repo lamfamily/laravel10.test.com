@@ -1,0 +1,31 @@
+### test login
+POST https://laravel10.test.com/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "winfield15@example.net",
+    "password": "password"
+}
+
+### get authenticated user
+POST https://laravel10.test.com/api/auth/me
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xhcmF2ZWwxMC50ZXN0LmNvbS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MzE0NzkyMywiZXhwIjoxNzQzMTUxNTIzLCJuYmYiOjE3NDMxNDc5MjMsImp0aSI6IlZ1cTg5N3h2bk8yeTN2WFQiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.FWf_oTX-k5frUCV6cB-pAlAj6RH19nXDRlYsntO-G2E
+Content-Type: application/json
+Accept: application/json
+
+
+### test logout
+POST https://laravel10.test.com/api/auth/logout
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xhcmF2ZWwxMC50ZXN0LmNvbS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MzE0NzkyMywiZXhwIjoxNzQzMTUxNTIzLCJuYmYiOjE3NDMxNDc5MjMsImp0aSI6IlZ1cTg5N3h2bk8yeTN2WFQiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.FWf_oTX-k5frUCV6cB-pAlAj6RH19nXDRlYsntO-G2E
+Content-Type: application/json
+Accept: application/json
+
+
+### test refresh a token
+POST https://laravel10.test.com/api/auth/refresh
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xhcmF2ZWwxMC50ZXN0LmNvbS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MzE0NzkyMywiZXhwIjoxNzQzMTUxNTIzLCJuYmYiOjE3NDMxNDc5MjMsImp0aSI6IlZ1cTg5N3h2bk8yeTN2WFQiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.FWf_oTX-k5frUCV6cB-pAlAj6RH19nXDRlYsntO-G2E
+Content-Type: application/json
+Accept: application/json
+
+

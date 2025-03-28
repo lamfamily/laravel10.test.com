@@ -38,3 +38,7 @@ Artisan::command('test-color', function () {
     $this->line("<options=underscore;bg=cyan;fg=blue> MY MESSAGE </>");
 });
 
+Artisan::command('make-user', function() {
+    $users = \App\Models\User::factory()->count(10)->create();
+    $this->info("User created!");
+});
