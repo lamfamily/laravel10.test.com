@@ -46,14 +46,15 @@ Artisan::command('make-user', function() {
 
 
 Artisan::command('test-category1', function() {
-    // get all tree categories
-    $tree = Category::get()->toTree();
-
     // get all root categories
     $roots = Category::whereIsRoot()->get();
 
+    // get all tree categories
+    $tree = Category::get()->toTree();
+
+
     echo "<pre>";
-    var_dump($roots->toArray());
+    var_dump($tree->toArray());
     echo "</pre>";
     exit();
 });
