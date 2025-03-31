@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ECPayController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MasterCardController;
 
 /*
@@ -51,3 +52,6 @@ Route::prefix('/test')->group(function() {
 
 // for livewire
 Route::get('/livewire-counter', Counter::class);
+
+
+Route::resource('categories', CategoryController::class);

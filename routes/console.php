@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Services\ECPayService;
 use App\Models\TmpModels\KieOrder;
 use Illuminate\Foundation\Inspiring;
@@ -41,4 +42,18 @@ Artisan::command('test-color', function () {
 Artisan::command('make-user', function() {
     $users = \App\Models\User::factory()->count(10)->create();
     $this->info("User created!");
+});
+
+
+Artisan::command('test-category1', function() {
+    // get all tree categories
+    $tree = Category::get()->toTree();
+
+    // get all root categories
+    $roots = Category::whereIsRoot()->get();
+
+    echo "<pre>";
+    var_dump($roots->toArray());
+    echo "</pre>";
+    exit();
 });
